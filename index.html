@@ -1,0 +1,526 @@
+<title>منيو الزهراء</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Tajawal:wght@400;500;700;800&display=swap">
+<style>
+/* Layout: the printed menu, kept as cards. Checkered band, red masthead, sticky search and category chips, one bordered card per section with a red label on its top edge. */
+:root {
+  --bg: #FBF3E2;
+  --surface: #FFFDF7;
+  --ink: #3A1518;
+  --muted: #7A5C57;
+  --brand: #BE2029;
+  --price: #BE2029;
+  --gold: #F4C455;
+  --line: #E4CFA8;
+  --check: #EBDDC0;
+  --on-brand: #FFF7EA;
+  --font-display: "Lalezar", "Tajawal", sans-serif;
+  --font-body: "Tajawal", "Segoe UI", Tahoma, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1B1211;
+    --surface: #271817;
+    --ink: #F7E9DA;
+    --muted: #C2A99E;
+    --price: #FF8A8E;
+    --line: #4A3230;
+    --check: #3A2523;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1B1211;
+  --surface: #271817;
+  --ink: #F7E9DA;
+  --muted: #C2A99E;
+  --price: #FF8A8E;
+  --line: #4A3230;
+  --check: #3A2523;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  z-index: 30;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+.wrap {
+  max-width: 780px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.checker {
+  height: 18px;
+  background: conic-gradient(var(--brand) 25%, var(--check) 0 50%, var(--brand) 0 75%, var(--check) 0) 0 0 / 36px 36px;
+}
+
+/* masthead */
+.hero {
+  background: var(--brand);
+  color: var(--on-brand);
+  text-align: center;
+  padding-block: 26px 28px;
+}
+.logo {
+  display: inline-block;
+  padding: 0.05em 0.95em 0.25em;
+  border: 3px solid var(--on-brand);
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 2.7rem;
+  line-height: 1.3;
+}
+.en {
+  margin-top: 0.7rem;
+  direction: ltr;
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+}
+.hero h1 {
+  margin: 0.5rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 2.2rem;
+  line-height: 1.3;
+  color: var(--gold);
+}
+.where { margin: 0; font-size: 0.9rem; font-weight: 500; }
+
+/* sticky search and chips */
+.nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  padding-block: 10px 8px;
+}
+.search {
+  width: 100%;
+  font: inherit;
+  padding: 0.6rem 1.1rem;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+}
+.search::placeholder { color: var(--muted); }
+.search:focus-visible { outline: 3px solid var(--gold); outline-offset: 1px; border-color: var(--brand); }
+.chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-block: 10px 4px;
+  scrollbar-width: none;
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none;
+  padding: 0.35rem 0.95rem;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.chip:focus-visible { outline: 3px solid var(--gold); outline-offset: 1px; }
+.chip[aria-current="true"] { background: var(--brand); border-color: var(--brand); color: var(--on-brand); }
+
+/* sections */
+main { display: grid; gap: 46px; padding-block: 38px 28px; }
+.sec {
+  position: relative;
+  min-width: 0;
+  padding: 36px 16px 8px;
+  border: 2.5px solid var(--brand);
+  border-radius: 20px;
+  background: var(--surface);
+  scroll-margin-top: calc(var(--nav-h, 120px) + 44px + env(safe-area-inset-top, 0px));
+}
+.sec h2 {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -52%);
+  margin: 0;
+  padding: 0.1em 1.1em 0.2em;
+  border-radius: 10px;
+  background: var(--brand);
+  color: var(--on-brand);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.7rem;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.note {
+  margin: 0 0 6px;
+  text-align: center;
+  color: var(--price);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.55rem 1.2rem;
+  padding: 14px 2px;
+  border-top: 1.5px dotted var(--line);
+}
+.note + .item, h2 + .item { border-top: 0; }
+.name { font-weight: 800; font-size: 1.08rem; line-height: 1.4; }
+.desc { margin-top: 0.1rem; color: var(--muted); font-size: 0.86rem; line-height: 1.55; }
+.prices {
+  display: grid;
+  grid-template-columns: repeat(var(--n, 1), 3.5rem);
+  gap: 4px;
+  text-align: center;
+}
+.p { padding: 0.2rem 0 0.25rem; border-radius: 8px; background: var(--bg); }
+.p small { display: block; color: var(--muted); font-size: 0.7rem; font-weight: 500; line-height: 1.5; }
+.p b { font-size: 1.1rem; font-weight: 800; color: var(--price); font-variant-numeric: tabular-nums; line-height: 1.3; }
+.p.na b { color: var(--line); font-weight: 400; }
+.one .prices { grid-template-columns: auto; }
+.one .p { padding: 0.15rem 0.7rem 0.2rem; }
+.one .p b { font-size: 1.35rem; }
+@media (max-width: 540px) {
+  .item { grid-template-columns: 1fr; }
+  .prices { grid-template-columns: repeat(var(--n, 1), 1fr); max-width: 21rem; }
+  .item.one { grid-template-columns: 1fr auto; }
+  .item.one .prices { grid-template-columns: auto; }
+}
+.empty { margin: 40px 0; text-align: center; color: var(--muted); font-weight: 700; }
+
+/* footer */
+footer {
+  margin-top: 8px;
+  background: var(--brand);
+  color: var(--on-brand);
+  text-align: center;
+  padding-block: 26px 30px;
+}
+footer p { margin: 0; font-weight: 700; }
+.phones { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 14px; direction: ltr; }
+.phones a {
+  padding: 0.3rem 0.9rem;
+  border: 1.5px solid rgba(255, 247, 234, 0.55);
+  border-radius: 999px;
+  color: var(--on-brand);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+}
+.phones a:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.small { margin-top: 14px; font-size: 0.8rem; font-weight: 500; opacity: 0.9; }
+</style>
+
+<div class="page" dir="rtl" lang="ar">
+  <div class="checker" aria-hidden="true"></div>
+  <header class="hero">
+    <div class="wrap">
+      <div class="logo">الزهراء</div>
+      <div class="en">EL ZAHRAA · PIZZA &amp; CREPE</div>
+      <h1>المنيو</h1>
+      <p class="where">المنصورة - أول شارع بورسعيد - مساكن مشعل بجوار نادي الشعب</p>
+    </div>
+  </header>
+
+  <div class="nav" id="nav">
+    <div class="wrap">
+      <input class="search" id="q" type="search" placeholder="ابحث عن صنف، مثلاً شاورما أو نوتيلا" aria-label="ابحث في المنيو" autocomplete="off">
+      <nav class="chips" id="chips" aria-label="أقسام المنيو"></nav>
+    </div>
+  </div>
+
+  <main class="wrap" id="menu"></main>
+  <p class="empty wrap" id="empty" hidden>لا توجد أصناف مطابقة للبحث.</p>
+
+  <footer>
+    <div class="wrap">
+      <p>المنصورة - أول شارع بورسعيد - مساكن مشعل بجوار نادي الشعب</p>
+      <div class="phones" id="phones"></div>
+      <p class="small">الأسعار بالجنيه المصري</p>
+    </div>
+  </footer>
+  <div class="checker" aria-hidden="true"></div>
+</div>
+
+<script>
+(function () {
+  var SZ4 = ["ميني", "صغير", "وسط", "كبير"];
+  var SZ2 = ["صغير", "كبير"];
+  var N = null;
+
+  /* item: [name, description, prices]; prices follow the section's sizes, N = not offered */
+  var CATS = [
+    { id: "crepe", title: "الكريبات", note: "اختار حجمك: كبير / صغير", sizes: SZ2, items: [
+      ["مكس جبن", "كريس، شيدر، رومي، موتزاريلا، خضروات", [N, 60]],
+      ["فاهيتا", "صدور فراخ، موتزاريلا، خضروات", [90, 120]],
+      ["فرايداي", "فراخ كرسبي، موتزاريلا، خضروات", [90, 120]],
+      ["نوتيلا", "فول، زبيب", [N, 70]],
+      ["نوتيلا موز", "نوتيلا، موز", [N, 75]],
+      ["نوتيلا مكسرات", "بندق، لوز، عين جمل", [N, 100]],
+      ["مكس لحوم", "كفتة، برجر، سوسيس، موتزاريلا، خضروات", [90, 120]],
+      ["سوبر كرانشي", "سترس، رومي مدخن، موتزاريلا، خضروات", [90, 120]],
+      ["زنجر", "سترس، سلامي، موتزاريلا، خضروات", [80, 110]],
+      ["كرسبي", "سترس، موتزاريلا، خضروات", [80, 110]],
+      ["بانية", "بانية، موتزاريلا، خضروات", [90, 120]],
+      ["سويت تشيلي", "صوص سويت تشيلي، موتزاريلا، خضروات", [90, 120]],
+      ["شيش طاووق", "شيش طاووق، موتزاريلا، خضروات", [90, 120]],
+      ["باربكيو", "شيش، صوص باربكيو، موتزاريلا، خضروات", [90, 120]],
+      ["شاورما فراخ", "شاورما، موتزاريلا، خضروات", [90, 120]],
+      ["كوردن بلو", "كوردن بلو، موتزاريلا، خضروات", [90, 120]],
+      ["مكس فراخ", "شيش، بانية، سترس، رومي مدخن، خضروات", [N, 150]],
+      ["سي فود", "جمبري، كابوريا، فيلية، كلماري، موتزاريلا، خضروات", [80, 110]],
+      ["برجر", "برجر، موتزاريلا، خضروات", [80, 110]],
+      ["كفتة", "كفتة، موتزاريلا، خضروات", [80, 110]],
+      ["سوسيس", "سوسيس، موتزاريلا، خضروات", [50, N]],
+      ["بطاطس", "بطاطس، موتزاريلا، خضروات", [60, N]]
+    ]},
+    { id: "kono", title: "كريبات كونو الأكيل", chip: "كونو الأكيل", note: "وجبة كاملة + طبق بطاطس", items: [
+      ["كرنفال الزهراء", "سترس، كفتة، شيش، برجر، سوسيس، موتزاريلا، خضروات + طبق بطاطس", [170]],
+      ["أربى جي", "كوردن بلو، شيش، سوسيس، موتزاريلا، خضروات + طبق بطاطس", [150]],
+      ["ولعة", "كوردن بلو، سويت تشيلي، سوسيس، موتزاريلا، خضروات + طبق بطاطس", [150]],
+      ["القاضية ممكن", "كوردن بلو، كفتة، شيش، سوسيس، موتزاريلا، خضروات + طبق بطاطس", [150]],
+      ["كلاشينكوف", "سترس، كفتة، شيش، سوسيس، موتزاريلا، خضروات + طبق بطاطس", [150]],
+      ["الأكيل", "برجر، شيش، سوسيس، موتزاريلا، خضروات + طبق بطاطس", [150]]
+    ]},
+    { id: "syrian", title: "ركن السوري", items: [
+      ["بطاطس سوري", "", [40]],
+      ["بطاطس موتزاريلا", "", [50]],
+      ["شاورما صغير", "", [80]],
+      ["شاورما كبير", "", [90]],
+      ["وجبة شاورما صغير", "", [110]],
+      ["وجبة شاورما وسط", "", [140]],
+      ["وجبة شاورما كبير", "", [170]]
+    ]},
+    { id: "pizza", title: "البيتزا الإيطالي", chip: "البيتزا", sizes: SZ4, items: [
+      ["كرنفال الزهراء", "استرس، موتزاريلا، مفروم، خضروات، شيش، سوسيس", [140, 180, 230, 280]],
+      ["سوبريم لحوم", "لحم بقري مدخن، موتزاريلا، بيبروني، خضروات، هوت دوج، مشروم", [130, 180, 220, 270]],
+      ["سوبريم لحوم تكساس", "صوص التكساس، موتزاريلا، مفروم، خضروات، هوت دوج، مشروم", [N, 180, 230, 280]],
+      ["مكس بيف مدخن تكساس", "لحم بقري مدخن، صوص تكساس، موتزاريلا، بيبروني، رومي مدخن، خضروات", [140, 180, 230, 280]],
+      ["مكس بيف مدخن", "لحم بقري مدخن، موتزاريلا، بيبروني، رومي مدخن، خضروات", [130, 180, 220, 280]],
+      ["شيلي بيف", "لحم بقري مدخن، صوص شيلي، موتزاريلا، بيبروني، خضروات", [140, 180, 230, 280]],
+      ["بسطرمة", "موتزاريلا، بسطرمة، خضروات", [130, 180, 220, 270]],
+      ["سجق", "موتزاريلا، سجق، خضروات", [130, 180, 220, 270]],
+      ["هوت دوج", "موتزاريلا، هوت دوج، خضروات", [130, 180, 220, 270]],
+      ["بيبروني", "موتزاريلا، بيبروني، خضروات", [130, 180, 220, 270]],
+      ["مفروم", "موتزاريلا، مفروم، خضروات", [130, 180, 220, 270]],
+      ["سوبر كرانشي", "موتزاريلا، صوص كرانشي، قطع ستريس، خضروات", [130, 180, 220, 270]],
+      ["كرسبي", "موتزاريلا، قطع كرسبي، خضروات", [130, 180, 220, 270]],
+      ["شيش طاووق", "موتزاريلا، شيش طاووق، خضروات", [130, 180, 220, 270]],
+      ["تشيكن باربكيو", "موتزاريلا، قطع شيش، صوص باربكيو", [140, 180, 230, 280]],
+      ["تشيكن رانش", "موتزاريلا، قطع شيش، سترس، صوص رانش", [140, 180, 230, 280]],
+      ["سوبريم فراخ", "موتزاريلا، قطع شيش طاووق، رومي مدخن، بانية", [130, 180, 220, 280]],
+      ["جولياتو", "موتزاريلا، خضروات، سوسيس، شيش", [130, 180, 220, 280]],
+      ["فور سيزون", "٤ أصناف من اختيارك", [N, N, 250, 300]],
+      ["تونة", "موتزاريلا، تونة، خضروات", [130, 180, 220, 280]],
+      ["كوردن بلو", "موتزاريلا، كوردن بلو، خضروات", [130, 180, 220, 280]],
+      ["مشكل جبن", "موتزاريلا، كريس، شيدر، رومي، خضروات", [100, 130, 170, 210]],
+      ["مارجريتا", "موتزاريلا، خضروات", [100, 130, 170, 210]]
+    ]},
+    { id: "fatayer", title: "الفطائر الحادقة", chip: "الفطائر", sizes: SZ4, items: [
+      ["كرنفال الزهراء", "مفروم، شيش، سوسيس، بسطرمة، رومي، موتزاريلا، شيدر، خضروات", [200, 250, 300, 350]],
+      ["مشكل جبن لحوم", "سجق، سوسيس، رومي، شيدر، موتزاريلا، خضروات", [160, 210, 270, 320]],
+      ["مشكل جبن بسطرمة", "سجق، مفروم، بسطرمة، رومي، موتزاريلا، شيدر، خضروات", [180, 230, 270, 320]],
+      ["جبن لحوم تكساس", "سجق، مفروم، صوص تكساس، رومي، موتزاريلا، شيدر، خضروات", [190, 240, 290, 340]],
+      ["مشكل جبن سوسيس", "سوسيس، رومي، موتزاريلا، شيدر، خضروات", [160, 210, 270, 320]],
+      ["مشكل جبن مفروم", "مفروم، رومي، موتزاريلا، شيدر، خضروات", [160, 210, 270, 320]],
+      ["مشكل جبن سجق عجينة", "سجق عجينة، رومي، موتزاريلا، شيدر، خضروات", [160, 210, 270, 320]],
+      ["مشكل جبن سوسيس بسطرمة", "سوسيس، بسطرمة، رومي، موتزاريلا، شيدر، خضروات", [180, 230, 280, 340]],
+      ["مكس بيف مدخن تكساس", "لحم بقري مدخن، رومي مدخن، بيبروني، موتزاريلا، شيدر، خضروات", [190, 240, 290, 340]],
+      ["مكس بيف مدخن", "لحم بقري مدخن، رومي مدخن، بيبروني، موتزاريلا، شيدر، خضروات", [180, 230, 280, 330]],
+      ["شيلي بيف", "لحم بقري مدخن، صوص شيلي، موتزاريلا، شيدر، رانش، خضروات", [190, 240, 290, 340]],
+      ["مشكل جبن فراخ", "بانية، شيش، رومي، موتزاريلا، شيدر، خضروات", [160, 210, 260, 320]],
+      ["مشكل جبن فراخ رانش", "بانية، شيش، رومي، موتزاريلا، شيدر، صوص رانش، خضروات", [180, 230, 280, 340]],
+      ["مشكل جبن فراخ باربكيو", "بانية، شيش، رومي، موتزاريلا، شيدر، صوص باربكيو، خضروات", [180, 230, 280, 340]],
+      ["مشكل جبن كرانشي رانش", "استرس حار، صوص رانش، موتزاريلا، شيدر، خضروات", [190, 240, 290, 350]],
+      ["مشكل جبن كرانشي", "استرس حار، موتزاريلا، شيدر، خضروات", [180, 230, 280, 340]],
+      ["سوبر كرانشي", "استرس، رومي، موتزاريلا، شيدر، خضروات", [180, 230, 280, 340]],
+      ["مشكل فراخ بسطرمة", "شيش، بانية، موتزاريلا، بسطرمة، خضروات", [200, 250, 300, 350]],
+      ["مشكل جبن", "كريس، رومي، موتزاريلا، شيدر، خضروات", [100, 140, 180, 230]],
+      ["مشكل جبن رانش", "موتزاريلا، شيدر، صوص رانش، خضروات", [120, 160, 200, 260]],
+      ["جبنة رومي", "رومي، شيدر، خضروات", [100, 140, 180, 230]],
+      ["سي فود", "جمبري، كابوريا، فيلية، كلماري، مشروم، موتزاريلا، رومي، شيدر، خضروات", [300, 360, 450, N]],
+      ["جبن سجق قطع", "سجق قطع، كيري، موتزاريلا، رومي، شيدر، خضروات", [300, 360, 450, N]],
+      ["تونة", "تونة، موتزاريلا، رومي، شيدر، خضروات", [160, 210, 260, 320]],
+      ["تونة بسطرمة", "تونة، بسطرمة، موتزاريلا، رومي، شيدر، خضروات", [200, 250, 300, 350]],
+      ["صيامي", "مشروم، خضروات", [100, 140, 160, 200]],
+      ["فطير مشلتت سمنة بلدي", "سمن بلدي أصلي", [130, 170, 230, 280]]
+    ]},
+    { id: "sweet", title: "الفطير الحلو", chip: "الحلويات", sizes: SZ4, items: [
+      ["كريمة", "كريمة، فول، زبيب", [100, 140, 180, 230]],
+      ["مكسرات", "فول، زبيب، جوز هند", [100, 140, 180, 230]],
+      ["عجوة", "عجوة، فول، زبيب، جوز هند", [100, 140, 180, 230]],
+      ["كريمة عجوة", "كريمة، عجوة، فول، زبيب، جوز هند", [120, 150, 190, 250]],
+      ["كريمة مكسرات", "كريمة، بندق، لوز، زبيب، جوز هند", [160, 200, 250, 300]],
+      ["فطير مكسرات بندق ولوز", "فول، جوز هند، بندق، لوز", [160, 200, 250, 300]],
+      ["سادة سكر وشربات", "سمن بلدي، سكر، شربات", [100, 140, 170, 220]],
+      ["نوتيلا", "نوتيلا، فول، زبيب، جوز هند", [150, 190, 230, 280]],
+      ["نوتيلا مكسرات", "نوتيلا، بندق، لوز، زبيب، جوز هند", [200, 250, 300, 350]],
+      ["نوتيلا فواكه", "نوتيلا، فول، موز، جوز هند", [150, 190, 230, 280]],
+      ["لوتس", "لوتس، فول، زبيب", [150, 190, 230, 280]],
+      ["حلو الزهراء", "كريمة، فول، زبيب، لوز، بندق، عين جمل، نوتيلا، لوتس", [200, 250, 300, 350]]
+    ]},
+    { id: "box", title: "البوكسات", items: [
+      ["بوكس وتش شاورما فراخ", "", [150]],
+      ["بوكس وتش مشكل لحوم بسطرمه", "", [150]],
+      ["بوكس وتش سوسيس", "", [130]],
+      ["بوكس وتش مشكل فراخ", "", [150]],
+      ["بوكس وتش كرانش", "", [150]],
+      ["بوكس وتش سجق اسكندراني", "", [150]],
+      ["بوكس وتش مشكل جبن", "", [100]],
+      ["بوكس وتش الزهراء", "", [180]]
+    ]}
+  ];
+
+  var PHONES = ["01142047495", "01033320168", "01008094344", "0502218799", "0504038877"];
+
+  var main = document.getElementById("menu");
+  var chipsBox = document.getElementById("chips");
+  var nav = document.getElementById("nav");
+  var emptyMsg = document.getElementById("empty");
+  var q = document.getElementById("q");
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function norm(s) {
+    return String(s)
+      .replace(/[ً-ْـ]/g, "")
+      .replace(/[أإآ]/g, "ا")
+      .replace(/ى/g, "ي")
+      .replace(/ة/g, "ه")
+      .toLowerCase();
+  }
+
+  var secs = [];
+  CATS.forEach(function (c) {
+    var link = el("a", "chip", c.chip || c.title);
+    link.href = "#" + c.id;
+    chipsBox.appendChild(link);
+
+    var s = el("section", "sec");
+    s.id = c.id;
+    s.appendChild(el("h2", null, c.title));
+    if (c.note) s.appendChild(el("p", "note", c.note));
+
+    var rows = [];
+    c.items.forEach(function (it) {
+      var single = !c.sizes;
+      var row = el("div", "item" + (single ? " one" : ""));
+      row.dataset.s = norm(it[0] + " " + it[1] + " " + c.title);
+
+      var info = el("div");
+      info.appendChild(el("div", "name", it[0]));
+      if (it[1]) info.appendChild(el("div", "desc", it[1]));
+      row.appendChild(info);
+
+      var pr = el("div", "prices");
+      if (single) {
+        var one = el("div", "p");
+        one.appendChild(el("b", null, String(it[2][0])));
+        pr.appendChild(one);
+      } else {
+        c.sizes.forEach(function (label, i) {
+          var v = it[2][i];
+          var p = el("div", "p" + (v == null ? " na" : ""));
+          p.appendChild(el("small", null, label));
+          var b = el("b", null, v == null ? "–" : String(v));
+          if (v == null) b.setAttribute("aria-label", "غير متاح");
+          p.appendChild(b);
+          pr.appendChild(p);
+        });
+        pr.style.setProperty("--n", c.sizes.length);
+      }
+      row.appendChild(pr);
+      s.appendChild(row);
+      rows.push(row);
+    });
+    main.appendChild(s);
+    secs.push({ el: s, link: link, rows: rows });
+  });
+
+  var phones = document.getElementById("phones");
+  PHONES.forEach(function (n) {
+    var a = el("a", null, n);
+    a.href = "tel:" + n;
+    phones.appendChild(a);
+  });
+
+  function filter() {
+    var term = norm(q.value.trim());
+    var shown = 0;
+    secs.forEach(function (o) {
+      var count = 0;
+      o.rows.forEach(function (r) {
+        var ok = !term || r.dataset.s.indexOf(term) !== -1;
+        r.hidden = !ok;
+        if (ok) count++;
+      });
+      o.el.hidden = count === 0;
+      o.link.hidden = count === 0;
+      shown += count;
+    });
+    emptyMsg.hidden = shown !== 0;
+    spy();
+  }
+
+  var current = -1;
+  function spy() {
+    var limit = nav.offsetHeight + 60;
+    var idx = 0;
+    secs.forEach(function (o, i) {
+      if (!o.el.hidden && o.el.getBoundingClientRect().top <= limit) idx = i;
+    });
+    if (idx === current) return;
+    current = idx;
+    secs.forEach(function (o, i) {
+      if (i === idx) o.link.setAttribute("aria-current", "true");
+      else o.link.removeAttribute("aria-current");
+    });
+    try { secs[idx].link.scrollIntoView({ inline: "center", block: "nearest" }); } catch (e) {}
+  }
+  function measure() {
+    document.documentElement.style.setProperty("--nav-h", nav.offsetHeight + "px");
+    spy();
+  }
+
+  q.addEventListener("input", filter);
+  var ticking = false;
+  window.addEventListener("scroll", function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { ticking = false; spy(); });
+  }, { passive: true });
+  window.addEventListener("resize", measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  measure();
+})();
+</script>
